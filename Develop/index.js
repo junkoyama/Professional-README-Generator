@@ -12,17 +12,18 @@ const questions = [
   {
     type: "input",
     name: "description",
-    message: "Write a brief desription of your project"
+    message: "Write a brief desription of your project",
   },
   {
     type: "input",
     name: "installation",
-    message: "Provide any steps required to install your project"
+    message: "Provide any steps required to install your project",
   },
   {
     type: "input",
     name: "usage",
-    message: "List any examples and instructions for use. Feel free to include screenshots or screenvideos as needed"
+    message:
+      "List any examples and instructions for use. Feel free to include screenshots or screenvideos as needed",
   },
   {
     type: "input",
@@ -32,28 +33,35 @@ const questions = [
   {
     type: "input",
     name: "contributing",
-    message: "List any contributors you'd like to add"
+    message: "List any contributors you'd like to add",
   },
   {
     type: "input",
     name: "tests",
-    message: "Would you like to to run any tests for your project?"
+    message: "Would you like to to run any tests for your project?",
   },
   {
     type: "input",
     name: "questions",
-    message: "Provide your e-mail address for contact use on questions"
-  }
+    message: "Provide your e-mail address for contact use on questions",
+  },
 ];
-
 // function to write README file
 function writeToFile(fileName, data) {
-
-};
+  return fs.writeFile(fileName, data, function (err) {
+    if (err) {
+      console.log(err);
+    }
+    console.log(data);
+  });
+}
 
 // function to initialize program
 function init() {
-    
+  inquirer.prompt(questions).then((data) => {
+    console.log(data);
+    writeToFile("README.md", generateMarkdown({ ...data }));
+  });
 }
 
 // function call to initialize program
